@@ -1,0 +1,27 @@
+var class_m2_mqtt_unity_1_1_m2mqtt_unity_client =
+[
+    [ "Awake", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a0b0873d2f67ce10a8d811b831371e1c1", null ],
+    [ "Connect", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#add3101d32e7b67924e5106de09ac3f7f", null ],
+    [ "DecodeMessage", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#adfe0a906fb6ba65c2dc18c975c7a6d20", null ],
+    [ "Disconnect", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#acbd62ac16fac7471f240516a9a99f2ce", null ],
+    [ "OnApplicationQuit", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a72f4ae40d619b1afa99567de3cfe71d7", null ],
+    [ "OnConnected", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ae32304f5e3af39c20cdfca7da5bd0e06", null ],
+    [ "OnConnecting", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ab7c1064b08649e3aa7bcd5949dd01e95", null ],
+    [ "OnConnectionFailed", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#af26ad45c4d8d66739d15e1a0dfe4300c", null ],
+    [ "OnConnectionLost", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a64e5a58868424622448f695771b182cc", null ],
+    [ "OnDisconnected", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#af8a00b73b4ba99bf4931a95a4acde89f", null ],
+    [ "ProcessMqttEvents", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a013d74d1679ca9d3e5344794d82e77fc", null ],
+    [ "Start", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a25844a8c9143432ce3c113fb0a3a5020", null ],
+    [ "SubscribeTopics", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ab7bd045d68de6c4b075eeed6b9f78ce1", null ],
+    [ "UnsubscribeTopics", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a00f8d9b69819b4b1d06081fb80d610ff", null ],
+    [ "Update", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ae54c61e2ae2aa1b894d442354f84b6b6", null ],
+    [ "autoConnect", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#aef587013115280a34b2646f00d435072", null ],
+    [ "brokerAddress", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ab3536c3e0e6412f75406ea489af96545", null ],
+    [ "brokerPort", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a01c3cb6989279d68de138a0a21808f0a", null ],
+    [ "client", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a0893d87d05baf421ad95463773a1ca62", null ],
+    [ "connectionDelay", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ae38864634dc60374fd274ea6158bd83e", null ],
+    [ "isEncrypted", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ac435be4e7719bd221dadc1dc2f69805c", null ],
+    [ "timeoutOnConnection", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#a4a81001eae1249ab87683e3a6dd39e9b", null ],
+    [ "ConnectionFailed", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#aa016c96e3335577235280e4586199f92", null ],
+    [ "ConnectionSucceeded", "class_m2_mqtt_unity_1_1_m2mqtt_unity_client.html#ae0cfd063e39a69e9ef2da234b0642676", null ]
+];
