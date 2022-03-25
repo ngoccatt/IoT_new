@@ -405,7 +405,7 @@ namespace M2MqttUnity
             if (client.IsConnected)
             {
                 mqttClientConnected = true;
-                //khi reconnect, ko can phai subscribe vao topic nua
+                //khi reconnect, ko can phai subscribe vao event nua
                 OnConnected();
             }
             else
