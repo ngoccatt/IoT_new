@@ -300,13 +300,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 170092959}
+  - component: {fileID: 170092960}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &170092959
 RectTransform:
   m_ObjectHideFlags: 0
@@ -331,6 +332,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &170092960
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170092958}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &172701571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,8 +1452,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 879108456}
-        m_TargetAssemblyTypeName: M2MqttUnity.yahalloMQTT.yahallo_script, Assembly-CSharp
+      - m_Target: {fileID: 1668231496}
+        m_TargetAssemblyTypeName: M2MqttUnity.yahalloMQTT.Manager_script, Assembly-CSharp
         m_MethodName: SetBrokerAddress
         m_Mode: 0
         m_Arguments:
@@ -1968,6 +1981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 752900529}
+  - component: {fileID: 752900530}
   m_Layer: 5
   m_Name: Data
   m_TagString: Untagged
@@ -2001,6 +2015,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &752900530
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752900528}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &771625693
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,20 +2291,8 @@ MonoBehaviour:
   autoConnect: 0
   mqttUserName: bkiot
   mqttPassword: 12345678
+  manager_object: {fileID: 1668231496}
   autoTest: 0
-  BrokerURL: {fileID: 356072350}
-  Username: {fileID: 1345421785}
-  Password: {fileID: 1948215174}
-  Notification: {fileID: 1207020919}
-  ConnectButton: {fileID: 2076664966}
-  Mainmenu: {fileID: 170092958}
-  Data: {fileID: 752900528}
-  TempHolder: {fileID: 1188216444}
-  HumidHolder: {fileID: 840003837}
-  led1: {fileID: 233688714}
-  pump1: {fileID: 255076328}
-  gauge1: {fileID: 922341201}
-  gauge2: {fileID: 572725040}
   Topics:
   - /bkiot/1912750/status
   - /bkiot/1912750/led
@@ -3609,8 +3623,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 879108456}
-        m_TargetAssemblyTypeName: M2MqttUnity.yahalloMQTT.yahallo_script, Assembly-CSharp
+      - m_Target: {fileID: 1668231496}
+        m_TargetAssemblyTypeName: M2MqttUnity.yahalloMQTT.Manager_script, Assembly-CSharp
         m_MethodName: SetUsername
         m_Mode: 0
         m_Arguments:
@@ -3935,6 +3949,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607143042}
   m_CullTransparentMesh: 1
+--- !u!1 &1668231495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668231497}
+  - component: {fileID: 1668231496}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1668231496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668231495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49e33de25af3b344a4d91afd33dcb0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MQTT_object: {fileID: 879108456}
+  BrokerURL: {fileID: 356072350}
+  Username: {fileID: 1345421785}
+  Password: {fileID: 1948215174}
+  Notification: {fileID: 1207020919}
+  ConnectButton: {fileID: 2076664966}
+  Mainmenu: {fileID: 170092960}
+  Data: {fileID: 752900530}
+  TempHolder: {fileID: 1188216444}
+  HumidHolder: {fileID: 840003837}
+  led1: {fileID: 233688714}
+  pump1: {fileID: 255076328}
+  gauge1: {fileID: 922341201}
+  gauge2: {fileID: 572725040}
+--- !u!4 &1668231497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668231495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8316984, y: -0.15241121, z: 429.77277}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1675380384
 GameObject:
   m_ObjectHideFlags: 0
@@ -4355,8 +4426,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 879108456}
-        m_TargetAssemblyTypeName: M2MqttUnity.yahalloMQTT.yahallo_script, Assembly-CSharp
+      - m_Target: {fileID: 1668231496}
+        m_TargetAssemblyTypeName: M2MqttUnity.yahalloMQTT.Manager_script, Assembly-CSharp
         m_MethodName: SetPassword
         m_Mode: 0
         m_Arguments:

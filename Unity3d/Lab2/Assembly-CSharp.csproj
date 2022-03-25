@@ -153,6 +153,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Plugin\M2MQTT\M2Mqtt\Internal\MsgPublishedInternalEvent.cs" />
     <Compile Include="Assets\Plugin\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
+    <Compile Include="Assets\Script\Manager_script.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

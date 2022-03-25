@@ -58,6 +58,8 @@ public class Switch_manager : MonoBehaviour, IPointerDownHandler
     {
         if (value != isOn)
         {
+            //do co luu thuoc tinh isOn, minh se han che viec toggle neu
+            //button da o trang thai value roi (ko can toggle lai)
             isOn = value;
 
             ToggleBackground(isOn);

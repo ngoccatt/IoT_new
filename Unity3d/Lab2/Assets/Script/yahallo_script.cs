@@ -44,6 +44,7 @@ namespace M2MqttUnity.yahalloMQTT
 {
 
     //copy json string, edit -> paste special
+    //cac thuoc tinh json duoc dat o ngoai class.
     public class Status
     {
         public int temperature { get; set; }
@@ -81,18 +82,10 @@ namespace M2MqttUnity.yahalloMQTT
     /// </summary>
     public class yahallo_script : M2MqttUnityClient
     {
+        [SerializeField]
+        private Manager_script manager_object;
         [Tooltip("Set this to true to perform a testing cycle automatically on startup")]
         public bool autoTest = false;
-        [Header("User Interface")]
-        public InputField BrokerURL;
-        public InputField Username;
-        public InputField Password;
-        public InputField Notification;
-        public Button ConnectButton;
-        public GameObject Mainmenu, Data;
-        public GameObject TempHolder, HumidHolder;
-        public Switch_manager led1, pump1;
-        public GameObject gauge1, gauge2;
         public string[] Topics;
         //Topics[0] -> status
         //Topics[1] -> led
@@ -102,59 +95,22 @@ namespace M2MqttUnity.yahalloMQTT
         public string Msg_receive_from_topic_fan;
 
 
-        private int humidity, temperature;
+        
         //private bool first_time_connect = false;
 
 
         private List<Message> eventMessages = new List<Message>();
-        private bool updateUI = false;
+
 
         public void TestPublish()
         {
             client.Publish("M2MQTT_Unity/test", System.Text.Encoding.UTF8.GetBytes("Test message"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             Debug.Log("Test message published");
-            AddUiMessage("Test message published.");
+            manager_object.AddUiMessage("Test message published.");
         }
 
-        public void SetBrokerAddress(string brokerAddress)
-        {
-            if (BrokerURL && !updateUI)
-            {
-                this.brokerAddress = brokerAddress;
-            }
-        }
+       
 
-        public void SetUsername(string username)
-        {
-            if (Username && !updateUI)
-            {
-                this.mqttUserName = username;
-            }
-        }
-
-        public void SetPassword(string password)
-        {
-            if (Password && !updateUI)
-            {
-                this.mqttPassword = password;
-            }
-        }
-
-        public void SetEncrypted(bool isEncrypted)
-        {
-            this.isEncrypted = isEncrypted;
-        }
-
-
-        public void SetUiMessage(string msg)
-        {
-            if (Notification != null)
-            {
-                Notification.text = msg;
-                updateUI = true;
-            }
-
-        }
 
         public override void Connect()
         {
@@ -164,35 +120,22 @@ namespace M2MqttUnity.yahalloMQTT
             }
             catch
             {
-                Notification.image.color = new Color32(255, 118, 117, 127);
-                AddUiMessage("Something went wrong");
-            }
-        }
-
-        public void AddUiMessage(string msg)
-        {
-            if (Notification != null)
-            {
-                Notification.text += msg + "\n";
-                updateUI = true;
+                manager_object.Notification_message(true, "Something went wrong");
             }
         }
 
         protected override void OnConnecting()
         {
             base.OnConnecting();
-            Notification.image.color = new Color32(85, 239, 196, 127);
-            SetUiMessage("Connecting to broker on " + brokerAddress + ":" + brokerPort.ToString() + "...\n");
+            manager_object.Notification_message(false, "Connecting to broker on " + brokerAddress + ":" + brokerPort.ToString() + "...\n");
         }
 
         protected override void OnConnected()
         {
             base.OnConnected();
-            Notification.image.color = new Color32(85, 239, 196, 127);
-            SetUiMessage("Connected to broker on " + brokerAddress + "\n");
+            manager_object.Notification_message(false, "Connected to broker on " + brokerAddress + "\n");
 
-            Mainmenu.SetActive(false);
-            Data.SetActive(true);
+            manager_object.switch_layer();
 
             //if (!first_time_connect)
             //{
@@ -223,19 +166,23 @@ namespace M2MqttUnity.yahalloMQTT
 
         }
 
+        public void Publish_message(string topic, string message)
+        {
+            //retain value must be true
+            client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(message),
+                MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+        }
+
         protected override void OnConnectionFailed(string errorMessage)
         {
-            Notification.image.color = new Color32(255, 118, 117, 127);
-            SetUiMessage("CONNECTION FAILED! " + errorMessage);
+            manager_object.Notification_message(true, "Connection failed");
             base.OnConnectionFailed(errorMessage);
         }
 
         protected override void OnDisconnected()
         {
-            Notification.image.color = new Color32(255, 118, 117, 127);
-            SetUiMessage("Disconnected.");
-            Data.SetActive(false);
-            Mainmenu.SetActive(true);
+            manager_object.Notification_message(true, "Disconnected");
+            manager_object.switch_layer();
             //UnsubscribeTopics(); ko can unsub o day. Khi nhan button logout, ham Disconnect duoc goi da unsub roi.
             base.OnDisconnected();
             //first_time_connect = false;
@@ -243,69 +190,21 @@ namespace M2MqttUnity.yahalloMQTT
 
         protected override void OnConnectionLost()
         {
-            Notification.image.color = new Color32(255, 118, 117, 127);
-            SetUiMessage("CONNECTION LOST!");
+            manager_object.Notification_message(true, "Connection lost!");
             base.OnConnectionLost();
         }
 
-        private void UpdateUI()
-        {
-            if (BrokerURL != null)
-            {
-                BrokerURL.text = brokerAddress;
-            }
-            if (Username != null)
-            {
-                Username.text = mqttUserName;
-            }
-            if (Password != null)
-            {
-                Password.text = mqttPassword;
-            }
-            updateUI = false;
-        }
+       
 
         protected override void Start()
         {
-            SetUiMessage("Ready.");
-            Notification.image.color = new Color32(85, 239, 196, 127);
-            updateUI = true;
-            Mainmenu.SetActive(true);
-            Data.SetActive(false);
+            manager_object.Notification_message(false, "Ready");
             base.Start();
 
         }
 
-        public void OnEnable()
-        {
-            led1.onSwitchChange += Led1_onSwitchChange;
-            pump1.onSwitchChange += Pump1_onSwitchChange;
-        }
-
-        public void OnDisable()
-        {
-            //phai luon nho *cat* cai event ra.
-            led1.onSwitchChange -= Led1_onSwitchChange;
-            pump1.onSwitchChange -= Pump1_onSwitchChange;
-        }
-
-        private void Pump1_onSwitchChange(bool value)
-        {
-            //string jsonString = "{\"device\":\"PUMP\", \"status\":" + (value ? "\"ON\"" : "\"OFF\"") + "}";
-            Device jsonDevice = new Device("PUMP", value ? "ON" : "OFF");
-            string jsonString = JsonConvert.SerializeObject(jsonDevice);
-            //retain value must be true
-            client.Publish("/bkiot/1912750/pump", System.Text.Encoding.UTF8.GetBytes(jsonString), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-        }
-
-        private void Led1_onSwitchChange(bool value)
-        {
-            //string jsonString = "{\"device\":\"LED\", \"status\":" + (value ? "\"ON\"" : "\"OFF\"") + "}";
-            Device jsonDevice = new Device("LED", value ? "ON" : "OFF");
-            string jsonString = JsonConvert.SerializeObject(jsonDevice);
-            //retain value must be true
-            client.Publish("/bkiot/1912750/led", System.Text.Encoding.UTF8.GetBytes(jsonString), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
-        }
+        //them event vao ham OnEnable
+       
 
         //this function is called when a message is received.
         protected override void DecodeMessage(string topic, byte[] message)
@@ -329,41 +228,15 @@ namespace M2MqttUnity.yahalloMQTT
         {
             if (msg.topic == Topics[0])         //status topic
             {
-                Status jsonStatus = JsonConvert.DeserializeObject<Status>(msg.message);
-                temperature = jsonStatus.temperature;
-                humidity = jsonStatus.humidity;
-                TempHolder.GetComponentsInChildren<Text>()[1].text = temperature + "°C";
-                HumidHolder.GetComponentsInChildren<Text>()[1].text = humidity + "%";
-
-                //gauge1: temperature
-                gauge1.GetComponent<Image>().fillAmount = (float)temperature / 100;
-                gauge1.GetComponentInChildren<Text>().text = temperature + "°C";
-                //gauge2: humidity
-                gauge2.GetComponent<Image>().fillAmount = (float)humidity / 100;
-                gauge2.GetComponentInChildren<Text>().text = humidity + "%";
+                manager_object.updateStatus(msg.message);
             }
             else if (msg.topic == Topics[1])    //led topic
             {
-                Device jsonDevice = JsonConvert.DeserializeObject<Device>(msg.message);
-                if (jsonDevice.status == "ON")
-                {
-                    led1.ToggleSwitch(true);
-                } else if (jsonDevice.status == "OFF")
-                {
-                    led1.ToggleSwitch(false);
-                }
+               manager_object.updateLed(msg.message);
             }
             else //msg.topic == Topic[2]        //pump topic
             {
-                Device jsonDevice = JsonConvert.DeserializeObject<Device>(msg.message);
-                if (jsonDevice.status == "ON")
-                {
-                    pump1.ToggleSwitch(true);
-                }
-                else if (jsonDevice.status == "OFF")
-                {
-                    pump1.ToggleSwitch(false);
-                }
+                manager_object.updatePump(msg.message);
             }
         }
 
@@ -378,10 +251,6 @@ namespace M2MqttUnity.yahalloMQTT
                     ProcessMessage(msg);
                 }
                 eventMessages.Clear();
-            }
-            if (updateUI)
-            {
-                UpdateUI();
             }
         }
 
