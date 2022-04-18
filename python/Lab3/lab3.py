@@ -19,7 +19,7 @@ mess = ""
 #TODO: Add your token and your comport
 #Please check the comport in the device manager
 THINGS_BOARD_ACCESS_TOKEN = "NM4ZJdbSG37xO0lnkCBP"
-bbc_port = "COM7"
+bbc_port = ""
 if len(bbc_port) > 0:
     ser = serial.Serial(port=bbc_port, baudrate=115200)
 
@@ -59,29 +59,26 @@ def subscribed(client, userdata, mid, granted_qos):
 
 def recv_message(client, userdata, message):
     print("Received: ", message.payload.decode("utf-8"))
-    temp_data = {'value': True}
     cmd = 99
     #TODO: Update the cmd to control 2 devices
     try:
         jsonobj = json.loads(message.payload)
         if jsonobj['method'] == "setLED":
             #DO STUFF
-            # print(type(jsonobj["params"]["led"]))
-            for key in jsonobj["params"]:
-                if jsonobj["params"][key] == True:
-                    cmd = COMMAND_LED_ON
-                elif jsonobj["params"][key] == False:
-                    cmd = COMMAND_LED_OFF
+            if jsonobj["params"] == True:
+                cmd = COMMAND_LED_ON
+            elif jsonobj["params"] == False:
+                cmd = COMMAND_LED_OFF
+            temp_data = {"led": jsonobj["params"]}
 
         if jsonobj['method'] == "setFan":
             #DO STUFF
-            for key in jsonobj["params"]:
-                if jsonobj["params"][key] == True:
-                    cmd = COMMAND_PUMP_ON
-                elif jsonobj["params"][key] == False:
-                    cmd = COMMAND_PUMP_OFF
+            if jsonobj["params"] == True:
+                cmd = COMMAND_PUMP_ON
+            elif jsonobj["params"] == False:
+                cmd = COMMAND_PUMP_OFF
+            temp_data = {"fan": jsonobj["params"]}
 
-        temp_data = jsonobj["params"]
         client.publish('v1/devices/me/attributes', json.dumps(temp_data), 1, True)
     except:
         pass
