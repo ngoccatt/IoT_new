@@ -414,7 +414,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "xx\xB0C"
+  m_Text: "??\xB0C"
 --- !u!222 &172701574
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1651,7 +1651,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: xx
+  m_Text: ??
 --- !u!222 &525402109
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4310,7 +4310,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: xx%
+  m_Text: ??%
 --- !u!222 &1754706741
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4592,7 +4592,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: xx
+  m_Text: ??
 --- !u!222 &2067888178
 CanvasRenderer:
   m_ObjectHideFlags: 0

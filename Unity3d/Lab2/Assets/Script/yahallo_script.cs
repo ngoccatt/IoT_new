@@ -116,6 +116,20 @@ namespace M2MqttUnity.yahalloMQTT
         {
             try
             {
+                if (brokerAddress != "mqttserver.tk")
+                {
+                    manager_object.Notification_message(true, "Broker address wrong");
+                    return;
+                }
+                if (mqttPassword != "12345678")
+                {
+                    manager_object.Notification_message(true, "Password Wrong");
+                    return;
+                } else if (mqttUserName != "bkiot")
+                {
+                    manager_object.Notification_message(true, "Username wrong");
+                    return;
+                }
                 base.Connect();
             }
             catch
@@ -228,15 +242,15 @@ namespace M2MqttUnity.yahalloMQTT
         {
             if (msg.topic == Topics[0])         //status topic
             {
-                manager_object.updateStatus(msg.message);
+                manager_object.update_Status(msg.message);
             }
             else if (msg.topic == Topics[1])    //led topic
             {
-               manager_object.updateLed(msg.message);
+               manager_object.update_Led(msg.message);
             }
             else //msg.topic == Topic[2]        //pump topic
             {
-                manager_object.updatePump(msg.message);
+                manager_object.update_Pump(msg.message);
             }
         }
 

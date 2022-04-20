@@ -109,9 +109,9 @@ while True:
 
     if len(bbc_port) > 0:
         readSerial()
-    # temperature = random.randint(0, 100)
-    # light = random.randint(0, 100)
-    # data = {"temperature": temperature, "light": light}
-    # client.publish("v1/devices/me/telemetry", json.dumps(data), 1, True)
+    temperature = random.randint(0, 100)
+    light = random.randint(0, 100)
+    data = {"temperature": temperature, "light": light}
+    client.publish("v1/devices/me/telemetry", json.dumps(data), 1, True)
     time.sleep(1)
 

@@ -78,10 +78,10 @@ namespace M2MqttUnity.yahalloMQTT
         {
             if (error == true)  //error
             {
-                Notification.image.color = new Color32(255, 118, 117, 127);
+                Notification.image.color = new Color32(255, 110, 110, 120);
             } else //not error
             {
-                Notification.image.color = new Color32(85, 239, 196, 127);
+                Notification.image.color = new Color32(85, 220, 190, 120);
             }
             SetUiMessage(message);
         }
@@ -203,7 +203,7 @@ namespace M2MqttUnity.yahalloMQTT
             updateUI = false;
         }
 
-        public void updateStatus(string jsonString)
+        public void update_Status(string jsonString)
         {
             Status jsonStatus = JsonConvert.DeserializeObject<Status>(jsonString);
             temperature = jsonStatus.temperature;
@@ -219,7 +219,7 @@ namespace M2MqttUnity.yahalloMQTT
             gauge2.GetComponentInChildren<Text>().text = humidity + "%";
         }
 
-        public void updateLed(string jsonString)
+        public void update_Led(string jsonString)
         {
             Device jsonDevice = JsonConvert.DeserializeObject<Device>(jsonString);
             if (jsonDevice.status == "ON")
@@ -232,7 +232,7 @@ namespace M2MqttUnity.yahalloMQTT
             }
         }
 
-        public void updatePump(string jsonString)
+        public void update_Pump(string jsonString)
         {
             Device jsonDevice = JsonConvert.DeserializeObject<Device>(jsonString);
             if (jsonDevice.status == "ON")
