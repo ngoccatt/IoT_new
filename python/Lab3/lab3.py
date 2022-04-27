@@ -16,10 +16,19 @@ BROKER_ADDRESS = "demo.thingsboard.io"
 PORT = 1883
 mess = ""
 
+def find_port():
+    a = list(serial.tools.list_ports.comports())
+    for x in a:
+        temp = str(x)
+        if "USB Serial Device" in temp:
+            temp = temp.split(" ")
+            return temp[0]
+    return ""
+
 #TODO: Add your token and your comport
 #Please check the comport in the device manager
 THINGS_BOARD_ACCESS_TOKEN = "NM4ZJdbSG37xO0lnkCBP"
-bbc_port = ""
+bbc_port = find_port()
 if len(bbc_port) > 0:
     ser = serial.Serial(port=bbc_port, baudrate=115200)
 
@@ -109,9 +118,9 @@ while True:
 
     if len(bbc_port) > 0:
         readSerial()
-    temperature = random.randint(0, 100)
-    light = random.randint(0, 100)
-    data = {"temperature": temperature, "light": light}
-    client.publish("v1/devices/me/telemetry", json.dumps(data), 1, True)
+    # temperature = random.randint(0, 100)
+    # light = random.randint(0, 100)
+    # data = {"temperature": temperature, "light": light}
+    # client.publish("v1/devices/me/telemetry", json.dumps(data), 1, True)
     time.sleep(1)
 

@@ -918,4 +918,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/yahallo.unity
-  playerPath: D:/GitHub/IoT/Unity3d/Lab2_1912750.apk
+  playerPath: D:/Lab2_1912750.apk
