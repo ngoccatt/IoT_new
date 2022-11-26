@@ -1,5 +1,7 @@
 import random
 
+import cv2
+
 print("IoT Gateway")
 import paho.mqtt.client as mqttclient
 import time
@@ -130,14 +132,23 @@ while True:
         readSerial()
 
     counter = counter + 1
-    if counter >= 5:
-        counter = 0
-        capture_image()
-        index, confidence = ai_detection()
-        # print("hello")
-        print("lab3.py ", index, confidence, AI_Results[index])
+    # if counter >= 5:
+    counter = 0
+    capture_image()
+    res = ai_detection()
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+    # print("hello")
+    # print("lab3.py ", res)
+    data = {"mask": int(round(res[0] * 100, 0)), "no_mask": int(round(res[1] * 100, 0)),
+            "background": int(round(res[2] * 100, 0))}
+    print(data)
+    client.publish('v1/devices/me/telemetry', json.dumps(data), qos=1, retain=True)
     # temperature = random.randint(0, 100)
     # light = random.randint(0, 100)
     # data = {"temperature": temperature, "light": light}
     # client.publish("v1/devices/me/telemetry", json.dumps(data), 1, True)
-    time.sleep(1)
+    time.sleep(0.1)
+
+cam.release()
+cv2.destroyAllWindows()

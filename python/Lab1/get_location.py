@@ -69,7 +69,7 @@ string = '''
     getLocation();'''.replace('\n', '').replace('\t', '')
 
 
-# repeat this code
+# timeOutRepeat this code
 try:
     driver.execute_script(string)
     time.sleep(2)

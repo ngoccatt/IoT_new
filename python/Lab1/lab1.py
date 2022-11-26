@@ -129,7 +129,7 @@ string = '''
     }
     getLocation();'''.replace('\n', '').replace('\t', '')
 
-# repeat this code
+# timeOutRepeat this code
 try:
     # o day, minh chi execute doan javascript tren 1 lan, chu yeu de goi ham watchPosition 1 lan va de no tu chay
     # moi lan watchPosition chay xong, no se goi ham callback va ghi vao phan tu <p id="location"> doan Json
@@ -154,7 +154,7 @@ except:
 while True:
     collect_data = {'temperature': temp, 'humidity': humi, 'light': light_intensity,
                     'longitude': longitude, 'latitude': latitude}  # thang nay la dict
-    # repeat code
+    # timeOutRepeat code
     try:
         # driver.execute_script(string)
         # time.sleep(2)

@@ -14,6 +14,7 @@ model = load_model('keras_model.h5')
 def capture_image():
     ret, frame = cam.read()
     cv2.imwrite("img_detect.png", frame)
+    cv2.imshow("detect", frame)
 
 
 def ai_detection():
@@ -45,11 +46,11 @@ def ai_detection():
         if max_value < result_ai[i]:
             max_value = result_ai[i]
             max_index = i
-    print(max_index, result_ai[max_index])
-    return max_index, int(result_ai[max_index] * 100)
+    # print(max_index, result_ai[max_index])
+    return result_ai
 
 # while True:
 #     capture_image()
 #     ai_detection()
-#     time.sleep(5)
+#     time.sleep(1)
 
